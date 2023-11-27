@@ -34,6 +34,14 @@ async function run() {
         // database//
 
         const postDatabase = client.db("Medical-camp").collection("user-post");
+        const JoinDatabase = client.db("Medical-camp").collection("join");
+        // add to card / join data//
+        app.post('/join', async (req, res) => {
+            const bodyy = req.body;
+            console.log(bodyy);
+            const result = await JoinDatabase.insertOne(bodyy)
+            res.send(result)
+        })
         // addPost//
         app.post('/post', async (req, res) => {
             const body = req.body;
@@ -42,7 +50,7 @@ async function run() {
             res.send(result)
         })
 
-        app.get('/post', async (req,res) =>{
+        app.get('/post', async (req, res) => {
             const result = await postDatabase.find().toArray()
             res.send(result)
         })
