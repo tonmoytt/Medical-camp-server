@@ -36,6 +36,7 @@ async function run() {
         const postDatabase = client.db("Medical-camp").collection("user-post");
         const JoinDatabase = client.db("Medical-camp").collection("join");
         const JoinAddedDatabase = client.db("Medical-camp").collection("join-added");
+
         //   add to confiorm data//
         app.post('/add', async (req, res) => {
             const addbody = req.body;
@@ -44,6 +45,10 @@ async function run() {
             res.send(result)
         })
 
+        app.get('/add', async (req, res) => {
+            const result = await JoinAddedDatabase.find().toArray()
+            res.send(result)
+        })
 
         // add to card / join data//
         app.post('/join', async (req, res) => {
