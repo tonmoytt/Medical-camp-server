@@ -50,6 +50,13 @@ async function run() {
             res.send(result)
         })
 
+        app.delete('/add/:id', async (req, res) => {
+            const id=req.params.id;
+            const cursor={_id : new ObjectId(id)}
+            const result = await movies.deleteOne(cursor);
+            res.send(result)
+        })
+
         // add to card / join data//
         app.post('/join', async (req, res) => {
             const bodyy = req.body;
